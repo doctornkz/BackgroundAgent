@@ -1,17 +1,15 @@
 package com.local.doctor.backgroundagent;
 
 import android.app.IntentService;
-
+import android.app.Service;
 import android.content.Intent;
+import android.os.IBinder;
+import android.os.StrictMode;
 import android.util.Log;
-
-/**
- * Created by doctor on 05.07.16.
- */
-
+import android.widget.Toast;
 
 public class Agent extends IntentService {
-    private static final String TAG = "zxcvbnm11"; /* define log tag*/
+    private static final String TAG = "Agent007"; /* define log tag*/
     // Must create a default constructor
     public Agent() {
         // Used to name the worker thread, important only for debugging.
@@ -25,21 +23,32 @@ public class Agent extends IntentService {
         // If a Context object is needed, call getApplicationContext() here.
 
         // Use Activity method to create a file in the writeable directory
-        for (int i=0; i < max; i++) {
-
-            try {
-                Log.i(TAG, "");
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-                Log.e(TAG, "");
-            }
-        }
+        Toast.makeText(this, "Service created...", Toast.LENGTH_LONG).show();
+        Log.i(TAG, "Service created!");
     }
-
+    @Override
+    public void onStart(Intent intent, int startId){
+        super.onStart(intent, startId);
+        Log.i(TAG, "Service started");
+    }
 
     @Override
-    protected void onHandleIntent(Intent intent) {
-        // This describes what will happen when service is triggered
+    public void  onDestroy() {
+        super.onDestroy();
+        Toast.makeText(this, "Service destroyed...", Toast.LENGTH_LONG).show();
+
     }
+
+    @Override
+    public IBinder onBind(Intent intent){
+        return null;
+    }
+
+    @Override
+    public void onHandleIntent(Intent intent){
+
+
+    }
+
+
 }

@@ -2,29 +2,27 @@ package com.local.doctor.backgroundagent;
 
 import android.app.Activity;
 import android.app.LauncherActivity;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 
 public class MainActivity  extends Activity {
-        private static final String TAG = ""; /* define log tag*/
-        // Call `launchTestService()` in the activity
-        // to startup the service
 
-        public void launchTestService() {
-
-            // Construct our Intent specifying the Service
-            Intent i = new Intent(this, Agent.class);
-            // Add extras to the bundle
-            i.putExtra("foo", "bar");
-            // Start the service
-            startService(i);
-
-
-            Log.e(TAG, "");
+        @Override
+        protected void onCreate(Bundle savedInstanceState){
+            super.onCreate(savedInstanceState);
+            TextView view = new TextView(this);
+            view.setText("Service Test");
+            Intent i = new Intent();
+            i.setClassName("com.local.doctor.backgroundagent", "com.local.doctor.backgroundagent.Agent");
+            bindService(i, null, Context.BIND_AUTO_CREATE);
+            this.startService(i);
+            setContentView(view);
 
         }
-
 
     }
 
